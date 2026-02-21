@@ -27,7 +27,6 @@ export const CameraWidget = () => {
       drawCanvas.current.width,
       drawCanvas.current.height
     );
-    // Use `Mediapipe` drawing functions
     drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS, {
       color: "#00cff7",
       lineWidth: 4,
@@ -41,7 +40,6 @@ export const CameraWidget = () => {
       lineWidth: 1,
     });
     if (results.faceLandmarks && results.faceLandmarks.length === 478) {
-      //draw pupils
       drawLandmarks(
         canvasCtx,
         [results.faceLandmarks[468], results.faceLandmarks[468 + 5]],

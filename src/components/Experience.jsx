@@ -9,12 +9,13 @@ export const Experience = () => {
 
   const { avatar } = useControls("VRM", {
     avatar: {
-      value: "3859814441197244330.vrm",
+      value: "PD's VModel.vrm",
       options: [
         "262410318834873893.vrm",
         "3859814441197244330.vrm",
         "3636451243928341470.vrm",
         "8087383217573817818.vrm",
+        "PD's VModel.vrm"
       ],
     },
   });
@@ -32,12 +33,12 @@ export const Experience = () => {
       <directionalLight intensity={1} position={[-10, 10, 5]} />
       <group position-y={-1.25}>
         <VRMAvatar avatar={avatar} />
-        <Gltf
+        {/* <Gltf
           src="models/sound-stage-final.glb"
           position-z={-1.4}
           position-x={-0.5}
           scale={0.65}
-        />
+        /> */}
       </group>
       <EffectComposer>
         <Bloom mipmapBlur intensity={0.7} />

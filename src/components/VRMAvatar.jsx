@@ -84,11 +84,11 @@ export const VRMAvatar = ({ avatar, ...props }) => {
       }
       if (results.faceLandmarks) {
         riggedFace.current = Face.solve(results.faceLandmarks, {
-          runtime: "mediapipe", // `mediapipe` or `tfjs`
+          runtime: "mediapipe",
           video: videoElement,
           imageSize: { width: 640, height: 480 },
-          smoothBlink: false, // smooth left and right eye blink delays
-          blinkSettings: [0.25, 0.75], // adjust upper and lower bound blink sensitivity
+          smoothBlink: false,
+          blinkSettings: [0.25, 0.75],
         });
       }
       if (results.za && results.poseLandmarks) {
@@ -263,7 +263,7 @@ export const VRMAvatar = ({ avatar, ...props }) => {
         });
       }
       // Eyes
-      if (lookAtTarget.current) {
+      if (lookAtTarget.current && riggedFace.current) {
         userData.vrm.lookAt.target = lookAtTarget.current;
         lookAtDestination.current.set(
           -2 * riggedFace.current.pupil.x,
@@ -277,11 +277,13 @@ export const VRMAvatar = ({ avatar, ...props }) => {
       }
 
       // Body
-      rotateBone("neck", riggedFace.current.head, delta * 5, {
-        x: 0.7,
-        y: 0.7,
-        z: 0.7,
-      });
+      if (riggedFace.current) {
+        rotateBone("neck", riggedFace.current.head, delta * 5, {
+          x: 0.7,
+          y: 0.7,
+          z: 0.7,
+        });
+      }
     }
     if (riggedPose.current) {
       rotateBone("chest", riggedPose.current.Spine, delta * 5, {
@@ -497,7 +499,7 @@ export const VRMAvatar = ({ avatar, ...props }) => {
     <group {...props}>
       <primitive
         object={scene}
-        rotation-y={avatar !== "3636451243928341470.vrm" ? Math.PI : 0}
+        rotation-y={avatar !== "PD's VModel.vrm" ? Math.PI : 0}
       />
     </group>
   );
